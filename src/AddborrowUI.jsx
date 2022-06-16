@@ -2,6 +2,7 @@ import React from "react";
 
 class AddborrowUI extends React.Component{
     render(){
+        
         const {addClick,btnDelete,falseEdit,saveInput,editCategory,dt ,changeInput} = this.props
         return(
             <>
