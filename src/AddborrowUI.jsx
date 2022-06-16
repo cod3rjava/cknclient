@@ -21,9 +21,7 @@ class AddborrowUI extends React.Component{
                  </tr>
             </tbody>
           </table>
-        
           </>
-           
         )
     }
 }

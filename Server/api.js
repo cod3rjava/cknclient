@@ -17,8 +17,6 @@ cron.schedule('43 11 * * *',()=>{
 })
 
 app.use(bodyParser.json());
-
-
 app.get("/getcategory", function(req, res){
     mongoClient.connect(url, function(err, clientObj){
         if(!err) {
