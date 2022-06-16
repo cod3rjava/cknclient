@@ -5,13 +5,14 @@ class CategoryUI extends React.Component{
         const {addClick,btnDelete,falseEdit,saveInput,editCategory,dt ,changeInput} = this.props
         return(
             <>
-            <table className="table  table-hover table-primary table-responsive">
+            <table className="table  table-hover table-responsive tbl-data">
             
             <tbody>
         
                  <tr>
                     <td key={dt.Name}>
-                        <input onChange={(e)=>changeInput(e.target.value)}
+                        <input className="tbl_input"
+                        onChange={(e)=>changeInput(e.target.value)}
                         onBlur={(m)=>saveInput(dt._id,m.target.value,dt)} 
                         disabled={dt.Condition} 
                         style={(dt.Condition === true?{border:"none"}:{border:""})} 

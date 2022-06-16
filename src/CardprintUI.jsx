@@ -6,18 +6,16 @@ class Cardprint extends React.Component{
         cost :0
     }
     render(){
-
         const { dt , addCost } = this.props
-
         return(
             <>
-            <div key={dt.Name} className="col">
+            <div key={dt.Name} className="col ">
             <div className="card h-100">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6szqA0z8YUR6Uw-fDTIibo-eQZG8Q5W33Jg&usqp=CAU" className="card-img-top" alt="..."/>
+                <img  src="https://i.redd.it/b3esnz5ra34y.jpg" className="card-img-top card_image" alt="..."/>
                     <div className="card-body">
                         <h3 className="card-title">{dt.Name}</h3>
-                        <input id="addinput" onChange={(g)=>this.setState({cost:g.target.value})} type="number" name={dt.Name} className="form-control" />
-                        <button onClick={()=>addCost(dt.Name,this.state.cost)}  className={"btn btn-success mt-3 form-control"}>Add</button>
+                        <input id="addinput" onChange={(g)=>this.setState({cost:g.target.value})} type="number" name={dt.Name} className="form-control input_color" />
+                        <button type="button" onClick={()=>addCost(dt.Name,this.state.cost)}  className={"btn btn-dark add_btn mt-3 form-control"}>Add</button>
                     </div>
             </div>
             </div>
@@ -33,3 +31,4 @@ class Cardprint extends React.Component{
 
 
 export default Cardprint
+ 

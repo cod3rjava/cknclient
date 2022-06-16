@@ -43,7 +43,7 @@ class Home extends React.Component{
     render(){
         return(
            <>
-            <div className="row row-cols-1 row-cols-md-5 g-1">
+            <div className="row row-cols-1 row-cols-md-5 g-2 mt-5">
                 {this.state.totalcategory.map(dt=>
                         <Cardprint
                         dt={dt}

@@ -5,15 +5,18 @@ import Home from "./cardprintLogic";
 import AddborrowLogic from "./AddborrowLogic";
 import BorrowPrintLogic from "./BorrowPrintLogic";
 
+// import {$,jQuery} from 'jquery';
+
 
 class Navbar extends React.Component{
-    
+   
     render(){
         return(
             <>
-            <Router>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Navbar</a>
+            
+             <Router>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <a class="navbar-brand fs-3" href="#">Chai Ke Nashedi</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -27,12 +30,12 @@ class Navbar extends React.Component{
                     <a class="nav-link " href="#">Add Category</a></Link>
                     </li>
                     <li class="nav-item">
-                        <Link to={"/addborrow"} >
-                    <a class="nav-link " href="#">Add Borrow</a></Link>
-                    </li>
-                    <li class="nav-item">
                         <Link to={"/printborrow"} >
                     <a class="nav-link " href="#">Show Borrow</a></Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link to={"/addborrow"} >
+                    <a class="nav-link " href="#">Add Borrow</a></Link>
                     </li>
                 </ul>
                 </div>

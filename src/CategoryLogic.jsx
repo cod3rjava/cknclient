@@ -83,6 +83,7 @@ class CategoryLogic extends React.Component{
         
         return(
             <>
+            <div style={{marginTop:"100px"}}>
             {this.state.category.map(dt=>
             <CategoryUI
             addClick={this.addClick}
@@ -92,11 +93,14 @@ class CategoryLogic extends React.Component{
             editCategory={this.editCategory}
             dt={dt}
             />
+
             )}
-              <h5>Add Category</h5>
-          <input onBlur={(m)=>this.editCategory(m.target.value)} ></input> 
-          <button onClick={this.addClick} className={"btn btn-success"}>Add</button>
-                
+            </div>
+            <div className="addcategory">
+            <h2>Add Category</h2>
+          <input className="add_input"  onBlur={(m)=>this.editCategory(m.target.value)} ></input> 
+          <button onClick={this.addClick} className={"glow-on-hover"} type="button">Add</button>
+          </div> 
             </>
         )
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import BorrowPrint from "./BorrowPrintUI";
-
+// import Input from '@mui/material/Input';
 
 class BorrowPrintLogic extends React.Component{
     state ={
@@ -9,6 +9,7 @@ class BorrowPrintLogic extends React.Component{
         cost : "",
         mg : ""
     }
+    
     borrowCall = ()=>{
         axios.get("http://127.0.0.1:8888/getBorrow")
         .then(res=>{
@@ -26,17 +27,11 @@ class BorrowPrintLogic extends React.Component{
         axios.get(`http://127.0.0.1:8888/getBorrowById/${id}`)
         .then(res=>{debugger
             var old = res.data[0]
-            // console.log(old)
-            // var id = old._id ;
             var oldAmount = old.Amount;
             var oldDicription = old.Description;
-            // console.log(id,oldAmount,oldDicription)
-
-            // var newAmount = parseInt(nll)
-
             var data = { 
-               Amount : value + oldAmount,
-               Description : oldDicription + "," + discription,
+               Amount : parseInt(value) + parseInt(oldAmount),
+               Description : oldDicription  + discription + ",",
             }
             debugger
             axios.put(`http://127.0.0.1:8888/updateBorrowAmount/${id}`,data)
@@ -49,13 +44,14 @@ class BorrowPrintLogic extends React.Component{
     render(){
         return(
            <>
-            <div className="row row-cols-1 row-cols-md-5 g-1">
+            <div className="row row-cols-1 row-cols-md-5 g-1 mt-5">
                 {this.state.totalborow.map(dt=>
                         <BorrowPrint
                         dt={dt}
                         addAMount={this.addAMount}
                         />
                 )}
+                {/* <Input/> */}
                  </div>
           
 

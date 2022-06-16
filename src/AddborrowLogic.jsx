@@ -77,9 +77,9 @@ class AddborrowLogic extends React.Component{
         
         return(
             <>
+            <div style={{marginTop:"100px"}}>
             {this.state.borrow.map(dt=>
             <AddborrowUI
-            
             btnDelete={this.btnDelete}
             falseEdit={this.falseEdit}
             saveInput={this.saveInput}
@@ -87,9 +87,10 @@ class AddborrowLogic extends React.Component{
             dt={dt}
             /> 
              )}
-              <h5>Add Category</h5>
-          <input onBlur={(m)=>this.editborrow(m.target.value)} ></input> 
-          <button onClick={this.addClick} className={"btn btn-success"}>Add</button>
+             </div>
+              <h3 style={{color:"white"}}>Add Category</h3>
+          <input className="add_input" onBlur={(m)=>this.editborrow(m.target.value)} ></input> 
+          <button onClick={this.addClick} className={"glow-on-hover"}>Add</button>
                 
             </>
         )
