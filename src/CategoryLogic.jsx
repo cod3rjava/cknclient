@@ -14,7 +14,7 @@ class CategoryLogic extends React.Component{
         
     }
     categoryCall = ()=>{
-        axios.get("http://127.0.0.1:8888/getcategory")
+        axios.get("http://127.0.0.1:8888/getCategory")
         .then(res=>{
             var totalcategory = res.data;
             this.setState({category : totalcategory})
@@ -29,7 +29,7 @@ class CategoryLogic extends React.Component{
             Name : this.state.newcategory,
             Condition: true,
         }
-        axios.post("http://127.0.0.1:8888/addcategory",addCat)
+        axios.post("http://127.0.0.1:8888/addCategory",addCat)
         .then(res=>{
             debugger
             console.log(res.data)
@@ -40,7 +40,7 @@ class CategoryLogic extends React.Component{
     }  
 
     btnDelete=(id)=>{
-        axios.delete(`http://127.0.0.1:8888/detetecategory/${id}`)
+        axios.delete(`http://127.0.0.1:8888/deleteCategoryById/${id}`)
         .then(res=>{
             console.log("Delete Success")
             console.log(res.data)
@@ -63,7 +63,7 @@ class CategoryLogic extends React.Component{
         var data = {
             Name : val
         }
-        axios.put(`http://127.0.0.1:8888/changeborder/${id}`,data)
+        axios.put(`http://127.0.0.1:8888/updateCategoryById/${id}`,data)
         .then(res=>{debugger
             console.log("Change Border Success")
             console.log(res.data)
@@ -96,7 +96,7 @@ class CategoryLogic extends React.Component{
 
             )}
             </div>
-            <div className="addcategory">
+            <div className="addCategory">
             <h2>Add Category</h2>
           <input className="add_input"  onBlur={(m)=>this.editCategory(m.target.value)} ></input> 
           <button onClick={this.addClick} className={"glow-on-hover"} type="button">Add</button>

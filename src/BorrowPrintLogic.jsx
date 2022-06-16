@@ -11,7 +11,7 @@ class BorrowPrintLogic extends React.Component{
     }
     
     borrowCall = ()=>{
-        axios.get("http://127.0.0.1:8888/getBorrow")
+        axios.get("http://127.0.0.1:8888/getBorrower")
         .then(res=>{
             var totalborow = res.data;
             this.setState({totalborow : totalborow})
@@ -20,7 +20,6 @@ class BorrowPrintLogic extends React.Component{
     componentDidMount(){
         this.borrowCall()
     }
-
     addAMount =(id,discription,value)=>{debugger
 
         console.log(id,discription,value)
@@ -34,7 +33,7 @@ class BorrowPrintLogic extends React.Component{
                Description : oldDicription  + discription + ",",
             }
             debugger
-            axios.put(`http://127.0.0.1:8888/updateBorrowAmount/${id}`,data)
+            axios.put(`http://127.0.0.1:8888/updateBorrowAmountById/${id}`,data)
             .then(res=>{debugger
                 console.log("New Amount add")
                 console.log(res.data)

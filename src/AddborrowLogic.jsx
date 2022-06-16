@@ -14,7 +14,7 @@ class AddborrowLogic extends React.Component{
         
     }
    borrowCall = ()=>{
-        axios.get("http://127.0.0.1:8888/getBorrow")
+        axios.get("http://127.0.0.1:8888/getBorrower")
         .then(res=>{
             var totalborrow = res.data;
             this.setState({borrow : totalborrow})
@@ -28,7 +28,7 @@ class AddborrowLogic extends React.Component{
             Name : this.state.newborrow,
             Condition: true,
         }
-        axios.post("http://127.0.0.1:8888/addBorrow",addborrow)
+        axios.post("http://127.0.0.1:8888/addBorrower",addborrow)
         .then(res=>{
             debugger
             console.log(res.data)
@@ -37,7 +37,7 @@ class AddborrowLogic extends React.Component{
         })
     }  
     btnDelete=(id)=>{debugger
-        axios.delete(`http://127.0.0.1:8888/deteteBorrow/${id}`)
+        axios.delete(`http://127.0.0.1:8888/deleteBorrowerById/${id}`)
         .then(res=>{
             console.log("Delete Success")
             console.log(res.data)
