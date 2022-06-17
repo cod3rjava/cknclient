@@ -24,11 +24,16 @@ class CategoryLogic extends React.Component{
         this.categoryCall()
     }
 
-    addClick = ()=>{
+    addClick = ()=>{debugger
         var addCat = {
             Name : this.state.newcategory,
             Condition: true,
         }
+        var expName = this.state.newcategory
+        var adddailyexpense = {
+            [expName] :0
+        }
+
         axios.post("http://127.0.0.1:8888/addCategory",addCat)
         .then(res=>{
             debugger
@@ -36,6 +41,13 @@ class CategoryLogic extends React.Component{
             console.log("Category Add Success");
             this.categoryCall();
         })
+
+        axios.put("http://127.0.0.1:8888/updateAllExpense",adddailyexpense)
+        .then(res=>{
+            console.log(res.data)
+            console.log("Update All Expense")
+        })
+
         this.setState({newcategory:""})
     }  
 
@@ -86,7 +98,7 @@ class CategoryLogic extends React.Component{
             <div style={{marginTop:"100px"}}>
             {this.state.category.map(dt=>
             <CategoryUI
-            addClick={this.addClick}
+            // addClick={this.addClick}
             btnDelete={this.btnDelete}
             falseEdit={this.falseEdit}
             saveInput={this.saveInput}

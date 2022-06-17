@@ -11,9 +11,9 @@ const { ObjectId } = require("mongodb");
 app.use(bodyParser.urlencoded({
     extended : true
 }));
-cron.schedule('43 11 * * *',()=>{
-    dailyEmptyObject()
-    console.log("successs Daily")
+cron.schedule('* * * * * *',()=>{
+    // dailyEmptyObject()
+    // console.log("successs Daily")
 })
 
 var dataBaseName = "ckndb"
@@ -56,24 +56,11 @@ app.post("/addCategory",function(req,res){
                 }
 
             })
-            var date = new Date().toLocaleDateString();
-            db.collection(dailyExpense).find({"Date":date}).toArray(function(err,documents){
-               if(!err){
-                   var doc = documents[0];
-                    var Id = doc._id
-               }
-               var data = {
-                [req.body.Name] : 0
-               }
-               console.log(data)
-               db.collection(dailyExpense).updateOne({"_id":new ObjectId(Id)},{$set:data}).then(resp=>{
-                //    console.log(resp.message)
-                   console.log("new category name add value 0")
-               })
-            })
+            
         }
     })
 })
+
 
 
 app.delete("/deleteCategoryById/:id",function(req,res){
@@ -145,7 +132,7 @@ app.get('/getDailyExpenseByDate', function(req,res){
             db.collection(dailyExpense).find({"Date":date}).toArray(function (err, documents){
                 if(!err) {
                     res.send(documents);
-                    console.log(documents)
+                    // console.log(documents)
                     console.log("Cureent day Success")
                 }
             })
@@ -153,15 +140,16 @@ app.get('/getDailyExpenseByDate', function(req,res){
     })
 })
 
-app.put("/updateDailyExpenseById/:id",function(req,res){
+app.put("/updateDailyExpenseByDate/:date",function(req,res){
     mongoClient.connect(url,function(err,clientObj){
         if(!err){
-            var Id = req.params.id;
+            var date = req.params.date.replaceAll("-","/");
+            console.log(date)
             var db = clientObj.db(dataBaseName);
 
             console.log(req.body)
 
-            db.collection(dailyExpense).updateOne({"_id":new ObjectId(Id)},{$set:req.body}).then(resp=>{
+            db.collection(dailyExpense).updateOne({"Date":date},{$set:req.body}).then(resp=>{
 
                 console.log("last data updata")
                 res.send("last data updata")
@@ -170,40 +158,60 @@ app.put("/updateDailyExpenseById/:id",function(req,res){
                 console.log("Not update")
                 res.send(err.message)
             })
-        }
+        } 
     })
 })
 
+app.put("/updateAllExpense",function(req,res){
+    mongoClient.connect(url,function(err,clientObj){
+        if(!err){
+            var Id = req.params.id;
+            var db = clientObj.db(dataBaseName);
+            console.log(req.body)
+            db.collection(dailyExpense).updateMany({},{$set:req.body}).then(resp=>{
+                console.log("Update All Expense update")
+                res.send("Update All Expense update")
+            },err=>{
+                console.log("Not All Expense Update")
+                res.send("Not All Expense Update")
+            })
+        }
+    })
+})
 ////// Daily Empty Object //////
 
-       function dailyEmptyObject(){
+app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
+
+       function dailyEmptyObject(req,res){
             mongoClient.connect(url,function(err,clientObj){
                 if(!err){
                     var db = clientObj.db(dataBaseName);
-                    var date = new Date().toLocaleDateString()
-                    var data = {
-                        "Date" : date,
-                        
-                        // "Debit" : {
-                        //         "Food" : 0,
-                        //         "Drink" : 0
-                        // },
-                        // "Credit" : {
-                        //         "Paytm" : 0,
-                        //         "Cash" : 0
-                        // }
-                        "Food":0,
-                        "Drink":0
-                    }
-                    db.collection(dailyExpense).insertOne(data,
-                    function(err,result){debugger
+
+                    var data = {Date : new Date().toLocaleDateString()}
+
+                    db.collection(categoryName).find().toArray(function (err, documents){
                         if(!err){
-                        console.log("Empty Object Create")
-                        }else{
-                            console.log(err.message)
-                            console.log("Failed Empty Object")
-                        }
-                    })
+                            var dd = documents.map(cp=>cp.Name)
+
+                            dd.forEach(i => data[i]=0)
+
+                            db.collection(dailyExpense).insertOne(data,
+                                function(err,result){debugger
+                                    if(!err){
+                                    console.log("Empty Object Create")
+                                    res.send("Create Empty Object Success")
+                                    }else{
+                                        console.log(err.message)
+                                        console.log("Failed Empty Object")
+                                    }
+                                })
+                      
+                    }}
+                    )
+                    
+            
+                  
+                   
                 }
             })
         }
@@ -253,7 +261,7 @@ app.put("/updateDailyExpenseById/:id",function(req,res){
 
 
         app.delete("/deleteBorrowerById/:id",function(req,res){
-            mongoClient.connect(url,function(err,clientObj){
+            mongoClient.connect(url,function(err,clientObj){    
                 if(!err){
                     var db = clientObj.db(dataBaseName);
                     var Id = req.params.id;

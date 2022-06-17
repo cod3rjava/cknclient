@@ -1,39 +1,67 @@
 .card {
     margin: 30px auto;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 80px;
     border-radius: 40px;
-    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
     cursor: pointer;
     transition: 0.4s;
   }
-  .card-title{
-      color: white;
-  }
- body{
-    background-color: #352452;
- } 
-  .card_image {
-    width: inherit;
-    height: inherit;
+  .card {
+    margin: 50px auto;
+    width: 200px;
+    height: 100px;
+    padding-top: 20px;
     border-radius: 40px;
-  }
-  
-  .card_image  {
-    width: inherit;
-    height: inherit;
-    border-radius: 40px;
-    object-fit: cover;
+    background-color: #ebecf1d4;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    transition: 0.4s;
     -webkit-border-radius: 40px;
     -moz-border-radius: 40px;
     -ms-border-radius: 40px;
     -o-border-radius: 40px;
 }
+.card p{
+  color: red;
+  margin: auto;
+}
+  .card-title{
+      color: black;
+      font-size: 30px;
+      font-weight: bold;
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+ body{
+    background-color: rgba(255, 255, 255, 0.756);
+ } 
+ 
+  /* .card_image {
+    width: inherit;
+    height: inherit;
+    border-radius: 40px;
+  }
+   */
+  .card_image  {
+    width: 50%;
+    height:35%;
+    margin: auto;
+    object-fit: cover;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+}
 
   
   .card:hover {
     transform: scale(0.9, 0.9);
-    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25),       -5px -5px 30px 15px rgba(0,0,0,0.22);
+    background-color: #E1E5EA;
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.25),       -5px -5px 30px 15px rgba(0,0,0,0.22);
     -webkit-transform: scale(0.9, 0.9);
     -moz-transform: scale(0.9, 0.9);
     -ms-transform: scale(0.9, 0.9);
@@ -51,9 +79,10 @@
   }
   
   .input_color{
-      background-color: #816797;
-      color: white;
-      font-size: 15px;
+      background-color: #f5fef3cf;
+      color:black;
+      font-weight: bold;
+      font-size: 18px;
       border-radius:50px;
       -webkit-border-radius:50px;
       -moz-border-radius:50px;
@@ -61,42 +90,27 @@
       -o-border-radius:50px;
 }
   .input_color:focus{
-      background-color:#6f2773ca;
-      color: white;
+      background-color:#dbc3dc97;
+      color: black;
       font-size: 20px;
   }
   .add_btn{
     border-radius:50px;
+    background-color: rgba(0, 0, 0, 0.527);
     -webkit-border-radius:50px;
     -moz-border-radius:50px;
     -ms-border-radius:50px;
     -o-border-radius:50px;
 }
 .add_btn:hover{
-  background-color:black;
+  background-color:rgba(0, 0, 0, 0.682);
 }
 .add_btn:active{
-  background-color:#520883;
+  background-color:black;
 }
   
   
-  .card {
-    margin: 30px auto;
-    width: 300px;
-    height: 300px;
-    border-radius: 40px;
-    background-color: #4C3575;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
-    transition: 0.4s;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    -ms-border-radius: 40px;
-    -o-border-radius: 40px;
-}
+ 
 /* .addcategory{
   height: 100px;
   width: 50rem;
@@ -104,14 +118,15 @@
 }
   */
   .borrow_input_color{
-    background-color: #816797;
-    color: white;
+    background-color: #d2bce5ce;
+    color: black;
     font-size: 15px;
     border-radius:50px;
     margin-top: 8px;
   }
   .borrow_input_color::placeholder{
-    color: white;
+    color: black;
+    font-weight: bold;
   }
     
 .borrow_input_color:focus{
@@ -124,7 +139,7 @@
 
 /* ///////    Navbar     */
 
-
+/* 
 ul{
 	display: flex;
 	width: 100%;
@@ -133,19 +148,37 @@ ul{
 	max-width: 1000px;
 	justify-content: space-between;
 	text-align: center;
+}*/
+.fs-3{
+  font-weight: bold;
 }
 li {
-	padding: 1rem 2rem 1.15rem;
+  float: right;
+	padding: 5px 5rem;
   text-transform: uppercase;
   cursor: pointer;
-  color: #ebebeb;
+  color: red;
 	min-width: 80px;
   list-style: none;
+  font-weight: bold;
   }
-
+.nav-link{
+  background-color: rgba(204, 204, 204, 0.462);
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+.nav-link:hover{
+  background-color: #ccc;
+}
+.nav-link:active{
+  background-color: #d9c8ea;
+}
 li:hover {
   background-size: 100% 100%;
-  color: #27262c;
+  color: #EEEEEE;
   animation: spring 800ms ease-out;
   font-size: 20px;
   font-weight: bold;
@@ -154,13 +187,15 @@ li:hover {
 li:active {
   transform: translateY(4px);
   font-size: 20px;
-  color: red;
 }
 a {
   transform: translateY(4px);
-  color: red;
+  
 }
-
+.nav_back{
+  background-color: rgb(211, 211, 239);
+}
+ 
 
 @keyframes spring {
   15% {
@@ -190,14 +225,14 @@ a {
   text-decoration: none;
 }
 .tbl-data{
-  background-color: #DEDDFA;
+  background-color: #eeeeeed7;
 }
 .tbl-data:hover{
-  background-color: #cbbfe0df;
+  background-color: #eeeeee92;
 }
-.tbl-data:active{
-  background-color: #C1F4C5;
-}
+/* .tbl-data:active{
+  background-color: red;
+} */
 .tbl_input{
   font-size: 20px;
   font-weight: bold;
@@ -218,7 +253,7 @@ a {
 
 .glow-on-hover {
   width: 100px;
-  height: 50px;
+  height: 35px;
   border: none;
   outline: none;
   color: #fff;
@@ -280,11 +315,11 @@ a {
   50% { background-position: 400% 0; }
 }
 .add_input{
-  height: 50px;
+  height: 35px;
   background-color: #e9e6f0c7;
   width: 200px;
   margin-right:5px;
-  background: linear-gradient(50deg, #5997ed,  #d9c8ea, #fdb7ee, #ecc1c1) ;
+  background: linear-gradient(50deg, #bfd1ea,  #c0b3ce, #decbda, #e3dada) ;
   font-size: 20px;
   border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -294,3 +329,6 @@ a {
 }
 
 
+.borrow_card{
+  margin-bottom: 20px;
+}

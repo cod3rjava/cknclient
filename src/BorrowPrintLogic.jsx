@@ -10,7 +10,7 @@ class BorrowPrintLogic extends React.Component{
         mg : ""
     }
     
-    borrowCall = ()=>{
+    borrowCall = ()=>{debugger
         axios.get("http://127.0.0.1:8888/getBorrower")
         .then(res=>{
             var totalborow = res.data;
@@ -37,13 +37,16 @@ class BorrowPrintLogic extends React.Component{
             .then(res=>{debugger
                 console.log("New Amount add")
                 console.log(res.data)
-            })              
+                this.borrowCall() 
+                document.getElementById("decription").value=""
+            }) 
+                      
         })
     }
     render(){
         return(
            <>
-            <div className="row row-cols-1 row-cols-md-5 g-1 mt-5">
+            <div className="row row-cols-2 row-cols-md-6 g-1 mt-5">
                 {this.state.totalborow.map(dt=>
                         <BorrowPrint
                         dt={dt}
