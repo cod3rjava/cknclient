@@ -7,10 +7,12 @@ class BorrowPrintLogic extends React.Component{
     state ={
         totalborow : [],
         cost : "",
-        mg : ""
+        mg : "",
+        creditAmount :0,
+        debitAmount:0,
+        description:""
     }
-    
-    borrowCall = ()=>{debugger
+    borrowCall = ()=>{
         axios.get("http://127.0.0.1:8888/getBorrower")
         .then(res=>{
             var totalborow = res.data;
@@ -20,27 +22,54 @@ class BorrowPrintLogic extends React.Component{
     componentDidMount(){
         this.borrowCall()
     }
-    addAMount =(id,discription,value)=>{debugger
+    setCredit = (value)=>{
+        this.setState({creditAmount : value})
+    }
+    setDebit = (value)=>{
+        this.setState({debitAmount : value})
+    }
 
-        console.log(id,discription,value)
+
+
+
+    addAMount =(id)=>{
+
+        
         axios.get(`http://127.0.0.1:8888/getBorrowById/${id}`)
-        .then(res=>{debugger
-            var old = res.data[0]
-            var oldAmount = old.Amount;
-            var oldDicription = old.Description;
-            var data = { 
-               Amount : parseInt(value) + parseInt(oldAmount),
-               Description : oldDicription  + discription + ",",
+        .then(res=>{
+
+            var oldData = res.data[0]
+            var debitAmount = "debitAmount";
+            var creditAmount = "creditAmount";
+            var totalAmount = "totalAmount";
+            var descriptionName = "description";
+            var newDebitAmount = this.state.debitAmount;
+            var newCreditAmount = this.state.creditAmount;
+            var  descriptionValue = this.state.description;
+
+            var newTotalData = {
+                [debitAmount]: parseInt(newDebitAmount) + oldData[debitAmount],
+                [creditAmount]: parseInt(newCreditAmount) + oldData[creditAmount],
+                [totalAmount]:(parseInt(newCreditAmount)+oldData[creditAmount]) - (parseInt(newDebitAmount) + oldData[debitAmount]),
+                [descriptionName]:oldData[descriptionName]
             }
-            debugger
-            axios.put(`http://127.0.0.1:8888/updateBorrowAmountById/${id}`,data)
-            .then(res=>{debugger
+            let newDescription = {
+                [descriptionName]:descriptionValue,
+                currentDebitAmount : parseInt(newDebitAmount),
+                currentCreditAmount:parseInt(newCreditAmount),
+                date: new Date().toLocaleDateString()
+            }
+            newTotalData[descriptionName].push(newDescription)
+                
+            axios.put(`http://127.0.0.1:8888/updateBorrowAmountById/${id}`,newTotalData)
+            .then(res=>{
                 console.log("New Amount add")
                 console.log(res.data)
                 this.borrowCall() 
-                document.getElementById("decription").value=""
+                this.setState({debit:0,
+                    credit:0
+                })
             }) 
-                      
         })
     }
     render(){
@@ -51,6 +80,8 @@ class BorrowPrintLogic extends React.Component{
                         <BorrowPrint
                         dt={dt}
                         addAMount={this.addAMount}
+                        setCredit={this.setCredit}
+                        setDebit={this.setDebit}
                         />
                 )}
                 {/* <Input/> */}

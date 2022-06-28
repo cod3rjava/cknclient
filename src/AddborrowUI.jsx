@@ -1,9 +1,10 @@
 import React from "react";
 
 class AddborrowUI extends React.Component{
+  
     render(){
         
-        const {addClick,btnDelete,falseEdit,saveInput,editCategory,dt ,changeInput} = this.props
+        const {condition,btnDelete,falseEdit,saveInput,editCategory,dt ,changeInput} = this.props
         return(
             <>
             <table className="table table-hover tbl-data table-responsive ">
@@ -18,7 +19,7 @@ class AddborrowUI extends React.Component{
                         defaultValue={dt.Name}/>
                         <span onClick={()=>falseEdit(dt)}>✏️</span>
                     </td>
-                     <td><button className="btn btn-danger" onClick={()=>btnDelete(dt._id)}>Delete</button></td>
+                     <td><button className="dlt_btn" onClick={()=>btnDelete(dt._id)}>Delete</button></td>
                  </tr>
             </tbody>
           </table>

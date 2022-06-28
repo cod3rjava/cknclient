@@ -2,13 +2,8 @@ import React from "react";
 
 
 class BorrowPrint extends React.Component{
-
-    state = {
-        amount :0,
-        description:""
-    }
     render(){
-        const { dt , addAMount } = this.props
+        const { dt , addAMount ,setDebit,setCredit} = this.props
         return(
             <>
             <div key={dt.Name} className="col borrow_card">
@@ -17,9 +12,10 @@ class BorrowPrint extends React.Component{
                     <div className="card-body">
                         <h3 className="card-title">{dt.Name}</h3>
                         <input id="decription" onChange={(g)=>this.setState({description:g.target.value})} type="text" name={dt.Name} className="form-control borrow_input_color" placeholder="Description" />
-                        <input onChange={(g)=>this.setState({amount:g.target.value})} type="number" name={dt.Name} className="form-control borrow_input_color" placeholder="Amount" />
-                        <p>{dt.Amount}</p>
-                        <button onClick={()=>addAMount(dt._id,this.state.description,this.state.amount)}className={"btn btn-dark add_btn mt-3 form-control"}>Add</button>
+                        <input onChange={(g)=>setCredit(g.target.value)} type="number" name={dt.Name} className="form-control borrow_input_color" placeholder="Credit" />
+                        <input onChange={(g)=>setDebit(g.target.value)} type="number" name={dt.Name} className="form-control borrow_input_color" placeholder="Debit" />
+                        <p>{dt.totalAmount}</p>
+                        <button onClick={()=>addAMount(dt._id)}className={"btn btn-dark add_btn mt-3 form-control"}>Add</button>
                     </div>
                 </div>  
             </div> 
@@ -27,13 +23,4 @@ class BorrowPrint extends React.Component{
         )
     }
 }
-
-
-
-  
-    
-  
- 
-
-
 export default BorrowPrint

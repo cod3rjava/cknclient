@@ -8,23 +8,23 @@ class Home extends React.Component{
         cost : "",
         mg : ""
     }
-    categoryCall = ()=>{debugger
+    categoryCall = ()=>{
         axios.get("http://127.0.0.1:8888/getCategory")
         .then(res=>{
             var totalcategory = res.data;
             this.setState({totalcategory : totalcategory})
         })
     }
-    componentDidMount(){debugger
+    componentDidMount(){
         this.categoryCall()
     }
     
-    addCost =(name,value)=>{debugger
+    addCost =(name,value)=>{
         axios.get("http://127.0.0.1:8888/getDailyExpenseByDate")
-        .then(res=>{debugger
+        .then(res=>{
             var nll = (value === null || value === undefined) ? 0 : value
             var old = res.data[0]
-            var id = old._id
+            // var id = old._id
             var date = old.Date.replaceAll("/","-") 
             var oldAmount = old[name]
             var newAmount = parseInt(nll)
@@ -32,9 +32,9 @@ class Home extends React.Component{
                [name] : newAmount + oldAmount
             }
 
-            debugger
+            
             axios.put(`http://127.0.0.1:8888/updateDailyExpenseByDate/${date}`,data)
-            .then(res=>{debugger
+            .then(res=>{
                 console.log("update success")
                 console.log(res.data)
                 this.setState({cost:0})

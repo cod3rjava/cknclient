@@ -24,7 +24,7 @@ class CategoryLogic extends React.Component{
         this.categoryCall()
     }
 
-    addClick = ()=>{debugger
+    addClick = ()=>{
         var addCat = {
             Name : this.state.newcategory,
             Condition: true,
@@ -36,7 +36,7 @@ class CategoryLogic extends React.Component{
 
         axios.post("http://127.0.0.1:8888/addCategory",addCat)
         .then(res=>{
-            debugger
+            
             console.log(res.data)
             console.log("Category Add Success");
             this.categoryCall();
@@ -60,7 +60,7 @@ class CategoryLogic extends React.Component{
         })
     } 
     
-    falseEdit = (dt)=>{debugger
+    falseEdit = (dt)=>{
       console.log(dt)
       var allcategory = [...this.state.category]
       var index = allcategory.indexOf(dt)
@@ -71,12 +71,12 @@ class CategoryLogic extends React.Component{
     changeInput =()=>{
     }
 
-    saveInput = (id,val,obj)=>{debugger
+    saveInput = (id,val,obj)=>{
         var data = {
             Name : val
         }
         axios.put(`http://127.0.0.1:8888/updateCategoryById/${id}`,data)
-        .then(res=>{debugger
+        .then(res=>{
             console.log("Change Border Success")
             console.log(res.data)
             this.categoryCall();

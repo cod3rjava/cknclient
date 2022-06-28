@@ -11,15 +11,16 @@ const { ObjectId } = require("mongodb");
 app.use(bodyParser.urlencoded({
     extended : true
 }));
-cron.schedule('* * * * * *',()=>{
-    // dailyEmptyObject()
-    // console.log("successs Daily")
-})
+// cron.schedule('* * * * * *',()=>{
+//     dailyEmptyObject()
+//     console.log("successs Daily")
+// })
 
 var dataBaseName = "ckndb"
 var categoryName = "category"
 var dailyExpense = "dailyExpense"
-var  borrower = "borrower"
+var borrower = "borrower"
+var users = "users"
 
 app.use(bodyParser.json());
 app.get("/getCategory", function(req, res){
@@ -51,7 +52,6 @@ app.post("/addCategory",function(req,res){
                    console.log("Recorted Inserted")
                    res.send('Record inserted')
                 }else{
-                    // console.log(err.message)
                     res.send(err.message)
                 }
 
@@ -180,7 +180,7 @@ app.put("/updateAllExpense",function(req,res){
 })
 ////// Daily Empty Object //////
 
-app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
+app.post("/dailyEmptyObject",(req,res)=>dailyEmptyObject(req,res))
 
        function dailyEmptyObject(req,res){
             mongoClient.connect(url,function(err,clientObj){
@@ -194,7 +194,7 @@ app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
                             var dd = documents.map(cp=>cp.Name)
 
                             dd.forEach(i => data[i]=0)
-
+                            
                             db.collection(dailyExpense).insertOne(data,
                                 function(err,result){debugger
                                     if(!err){
@@ -205,13 +205,8 @@ app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
                                         console.log("Failed Empty Object")
                                     }
                                 })
-                      
                     }}
                     )
-                    
-            
-                  
-                   
                 }
             })
         }
@@ -239,12 +234,7 @@ app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
             mongoClient.connect(url,function(err,clientObj){
                 if(!err){
                     var db = clientObj.db(dataBaseName);
-                    var data = {
-                        Name : req.body.Name,
-                        Condition : req.body.Condition,
-                        Amount :0,
-                        Description:"",
-                    }
+                    var data = req.body
                     db.collection(borrower).insertOne(data,
                     function(err,result){debugger
                         if(!err){
@@ -258,8 +248,7 @@ app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
                 }
             })
         })
-
-
+        
         app.delete("/deleteBorrowerById/:id",function(req,res){
             mongoClient.connect(url,function(err,clientObj){    
                 if(!err){
@@ -336,5 +325,82 @@ app.post("/getEmptyObject",(req,res)=>dailyEmptyObject(req,res))
             })
         })
 
+// ============================= // users data//=======================================================================       
+
+                    app.post("/signup",function(req,res){
+                        mongoClient.connect(url,function(err,clientObj){
+                            if(!err){
+                            
+                                var db = clientObj.db(dataBaseName);
+                                db.collection(users).insertOne(req.body,
+                                function(err,result){debugger
+                                    if(!err){
+                                       console.log("New Users Add Detail")
+                                       res.send('New Users Add Detail')
+                                    }else{
+                                        res.send(err.message)
+                                        res.send("new user detail failed")
+                                    }
+                                })
+                                
+                            }
+                        })
+                    })
+
+                    app.post("/usernameExist", function(req, res){
+                        mongoClient.connect(url, function(err, clientObj){
+                            var database = clientObj.db(dataBaseName);
+
+                            if(!err){
+                                var data = {
+                                    userName : req.body.userName
+                                }
+                                database.collection(users).find(data).toArray(function (err, documents){
+                                    if(!err) {
+                                        if(documents.length > 0){
+                                            res.send(true);
+                                            console.log("true")
+                                        }
+                                        else{
+                                            res.send(false)
+                                            console.log("false")
+                                        }
+                                    }
+                                    else{
+                                        res.send("username Exist method Not Working")
+                                    }
+                                })
+                            }
+                        })
+                    });
+
+
+                    app.post("/loginByUsername", function(req, res){
+                        mongoClient.connect(url, function(err, clientObj){
+                            var database = clientObj.db(dataBaseName);
+
+                            if(!err){
+                                var data = {
+                                    userName : req.body.userName,
+                                    password : req.body.password
+                                }
+                                database.collection(users).find(data).toArray(function (err, documents){
+                                    if(!err) {
+                                        if(documents.length > 0){
+                                            res.send(true);
+                                            console.log("true")
+                                        }
+                                        else{
+                                            res.send(false)
+                                            console.log("false")
+                                        }
+                                    }
+                                    else{
+                                        res.send("loginByUsername method Not Working")
+                                    }
+                                })
+                            }
+                        })
+                    });
 app.listen(8888);
 console.log("Server Started: http://127.0.0.1:8888");

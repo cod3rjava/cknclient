@@ -6,9 +6,7 @@ class CategoryUI extends React.Component{
         return(
             <>
             <table className="table  table-hover table-responsive tbl-data">
-            
             <tbody>
-        
                  <tr>
                     <td key={dt.Name}>
                         <input className="tbl_input"
@@ -19,9 +17,8 @@ class CategoryUI extends React.Component{
                         defaultValue={dt.Name}/>
                         <span onClick={()=>falseEdit(dt)}>✏️</span>
                     </td>
-                     <td><button className="btn btn-danger" onClick={()=>btnDelete(dt._id)}>Delete</button></td>
+                     <td><button className="dlt_btn" onClick={()=>btnDelete(dt._id)}>Delete</button></td>
                  </tr>
-            
             </tbody>
           </table>
         
